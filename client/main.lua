@@ -158,11 +158,14 @@ end)
 Citizen.CreateThread(function()
     while true do
         Wait(0)
-
+            
+        local sleep = true
+            
         for key, value in pairs(garages) do
             local dist = GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), value[1])
 
             if dist <= 2.0 then
+                sleep = false
                 ESX.ShowHelpNotification("Drücke ~INPUT_CONTEXT~ um auf dem Abschlepphof zuzugreifen")
 
                 if IsControlJustReleased(0, 38) then
@@ -171,6 +174,7 @@ Citizen.CreateThread(function()
                 end
             end
         end
+        if sleep then Citizen.Wait(1000) end
      end
 end)
 
